@@ -1,24 +1,18 @@
 <template>
-
   <article>
-    <h1 class="h1-shadow"><span style="color: indianred">e</span> - OČKOVANIE</h1>
-      <form class="sign-in" action="#">
-        <h2 class="h2-shadow">Prihlásenie</h2>
-          <label>
-            <input type="text" placeholder="Rodné číslo" />
-          </label>
-          <label>
-            <input id="password" type="password" value="boomer" placeholder="Heslo" />
-              <font-awesome-icon icon="eye" id="togglePassword" v-on:click="passwordVisibility" style="float: right; margin-left: -50px; margin-top: 18px; position: relative; z-index: 2; margin-bottom: -30px; cursor: pointer;" />
-          </label>
-          <div>
-            Zabudli ste heslo? Kliknite <a href="#">TU</a>.
+    <div class="container" :class="{'sign-up-active' : signUp}">
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-left">
+            <h2>Vitajte späť!</h2>
+            <p>Prosím prihláste sa s Vašimi údajmi:</p>
+            <button class="invert" id="SignIn"  @click="signUp = !signUp">Prihlásiť sa</button>
           </div>
-          <button id="btn-prihlasenie" v-on:click="login" >Prihlásiť sa</button>
-          <div>
-            Ak nie ste prihlásený zaregistrujte sa <a href="#">TU</a>.
+          <div class="overlay-right">
+            <h2>Dobrý deň!</h2>
+            <p>Prosím zaregistrujte sa s Vašími osobnými údajmi</p>
+            <button class="invert" id="signUp" @click="signUp = !signUp">Registrovať sa</button>
           </div>
-<<<<<<< HEAD
         </div>
       </div>
       <form class="sign-up" action="#">
@@ -36,8 +30,6 @@
         <button>Registrácia</button>
       </form>
 
-
-
       <form class="sign-in" action="#">
         <h2>Prihlásenie</h2>
         <div>Použite Váš účet</div>
@@ -52,16 +44,8 @@
       </form>
 
 
-=======
-      </form>
-
-    <div style="text-align: right; margin-top: 15px;">
-      <font-awesome-icon icon="question-circle" v-on:click="info" />
->>>>>>> 8f336aa79ac0fdf164bed09a736df7ca52fc29ee
     </div>
-
   </article>
-
 </template>
 
 <script>
@@ -83,23 +67,9 @@
     },
 
     methods: {
-<<<<<<< HEAD
       login() {
 
         let self = this ;
-=======
-      login(){
-        $.ajax({
-
-          url: 'https://eockovanie.somee.com/token',
-          method: 'POST',
-          contentType: 'application/x-www-form-urlencoded',
-          data: {
-            grant_type: 'password',
-            username: 'nick.bohdan@gmail.com',
-            password: 'Ahoj123.',
-          },
->>>>>>> 8f336aa79ac0fdf164bed09a736df7ca52fc29ee
 
         var res = this.input.email.toLowerCase();
 
@@ -132,38 +102,14 @@
 
 // dorobit registraciu axios
 
-      },
-
-      passwordVisibility(){
-        const togglePassword = document.querySelector('#togglePassword');
-        const password = document.querySelector('#password');
-
-        togglePassword.addEventListener('click', function (e) {
-          // toggle the type attribute
-          const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-          password.setAttribute('type', type);
-          // toggle the eye slash icon
-          this.classList.toggle('fa-eye fa-eye-slash');
-        });
-      },
-
-      info(){
-        alert ("Jednoduchá aplikácia pre registráciu na Vami vybrané očkovanie. Najprv sa v našej aplikácií zaregistrujete a potom prihlásite. Môžete si editovať svoj profil pomocou tlačidla editácia. V registrácií na očkovanie vyplníte všetky polia a vyberiete si časové rozmedzie. Ako posledný krok kliknite na tlačidlo dokončiť." );
       }
-<<<<<<< HEAD
-=======
-
-    }
->>>>>>> 8f336aa79ac0fdf164bed09a736df7ca52fc29ee
 
 
     }
   }
-
 </script>
 
 <style  scoped>
-<<<<<<< HEAD
 *{
   font-family: 'Roboto', sans-serif;
 }
@@ -206,26 +152,25 @@
   padding: 70px 40px;
   width: calc(50% - 80px);
   height: calc(100% - 140px);
-=======
-
-.h1-shadow {
-  font-weight: normal;
-  font-size: 48px;
->>>>>>> 8f336aa79ac0fdf164bed09a736df7ca52fc29ee
   text-align: center;
-  letter-spacing: 1px;
-  margin-top: -10px;
-  margin-bottom: 100px;
-  text-shadow: 0 10px 25px rgba(0, 0, 0, .2), 0 5px 5px rgba(0, 0, 0, .2);
+  transform: translateX(-20%);
+  transition: transform 0.5s ease-in-out;
 }
-
-.h2-shadow {
-  font-weight: normal;
-  font-size: 32px;
-  margin-top: -60px;
-  text-shadow: 0 10px 25px rgba(0, 0, 0, .2), 0 5px 5px rgba(0, 0, 0, .2);
+.container .overlay-right {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 70px 40px;
+  width: calc(50% - 80px);
+  height: calc(100% - 140px);
+  text-align: center;
+  transform: translateX(0);
+  transition: transform 0.5s ease-in-out;
+  right: 0;
 }
-
 h2 {
   margin: 0;
 }
@@ -233,68 +178,60 @@ p {
   margin: 20px 0 30px;
 }
 a {
-  /*color: #222;*/
+  color: #222;
   text-decoration: none;
   margin: 15px 0;
   font-size: 1rem;
 }
-
 button {
-  color: indianred;
-  text-shadow: 0 10px 25px rgba(0, 0, 0, .2), 0 5px 5px rgba(0, 0, 0, .2);
-  background-color: transparent;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 2px solid indianred;
-  font-size: 1.8rem;
+  border-radius: 20px;
+  border: 1px solid #009345;
+  background-color: #009345;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
   padding: 10px 40px;
   letter-spacing: 1px;
+  text-transform: uppercase;
   cursor: pointer;
-  /*transition: transform 0.1s ease-in;*/
+  transition: transform 0.1s ease-in;
 }
-
 button:active {
   transform: scale(0.9);
 }
-
 button:focus {
   outline: none;
 }
-
-/*button.invert {
+button.invert {
   background-color: transparent;
   border-color: #fff;
-}*/
-
+}
 form {
-  position: relative;
+  position: absolute;
   top: 0;
   display: flex;
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
   padding: 90px 60px;
-  width: 350px;
-  height: 370px;
+  width: calc(50% - 120px);
+  height: calc(100% - 180px);
   text-align: center;
-  background: white; /*linear-gradient(to bottom, #efefef, #ccc);*/
+  background: linear-gradient(to bottom, #efefef, #ccc);
   transition: all 0.5s ease-in-out;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, .2), 0 5px 5px rgba(0, 0, 0, .2);
-  border-radius: 10px;
 }
 form div {
   font-size: 1rem;
 }
 form input {
   background-color: #eee;
-  font-size: 18px;
   border: none;
   padding: 8px 15px;
   margin: 6px 0;
-  width: 270px;
-  height: 33px;
-  border-bottom: 1px solid black;
+  width: calc(100% - 30px);
+  border-radius: 15px;
+  border-bottom: 1px solid #ddd;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .4), 0 -1px 1px #fff, 0 1px 0 #fff;
   overflow: hidden;
 }
 form input:focus {
@@ -304,6 +241,46 @@ form input:focus {
 .sign-in {
   left: 0;
   z-index: 2;
+}
+.sign-up {
+  left: 0;
+  z-index: 1;
+  opacity: 0;
+}
+.sign-up-active .sign-in {
+  transform: translateX(100%);
+}
+.sign-up-active .sign-up {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show 0.5s;
+}
+.sign-up-active .overlay-container {
+  transform: translateX(-100%);
+}
+.sign-up-active .overlay {
+  transform: translateX(50%);
+}
+.sign-up-active .overlay-left {
+  transform: translateX(0);
+}
+.sign-up-active .overlay-right {
+  transform: translateX(20%);
+}
+@keyframes show {
+  0% {
+    opacity: 0;
+    z-index: 1;
+  }
+  49% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50% {
+    opacity: 1;
+    z-index: 10;
+  }
 }
 
 </style>

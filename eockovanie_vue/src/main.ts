@@ -15,17 +15,6 @@ import {
   faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons';
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import {faEye, faEyeSlash, faQuestionCircle, faUserSecret} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-library.add(faUserSecret)
-library.add(faEye)
-library.add(faEyeSlash)
-library.add(faQuestionCircle)
-
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
 Vue.config.productionTip = false
 library.add(faHome, faUser, faUserPlus, faSignInAlt, faSignOutAlt);
 Vue.use(VeeValidate);
