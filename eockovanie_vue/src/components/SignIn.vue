@@ -17,17 +17,28 @@
       </div>
       <form class="sign-up" action="#">
         <h2>Vytvorenie registrácie</h2>
-        <div>Použite Váš mail pre zaregistrovanie</div>
         <label>
-          <input type="text" placeholder="Name" />
+          <input type="text" v-model="input2.FirstName" placeholder="Meno" />
         </label>
         <label>
-          <input type="email" placeholder="Email" />
+          <input type="text" v-model="input2.LastName" placeholder="Priezvisko" />
         </label>
         <label>
-          <input type="password" placeholder="Heslo" />
+          <input type="email" v-model="input2.Email" placeholder="Email" />
         </label>
-        <button>Registrácia</button>
+        <label>
+          <input type="number" v-model="input2.PhoneNumber" placeholder="Telefónne číslo" />
+        </label>
+        <label>
+          <input type="password" v-model="input2.Password" placeholder="Heslo" />
+        </label>
+        <label>
+          <input type="number" v-model="input2.Pin" placeholder="Rodné číslo" />
+        </label>
+        <label>
+          <input type="text" v-model="input2.InsuranceCompany" placeholder="Poisťovňa" />
+        </label>
+        <button id="btn-registracia" v-on:click="register()" >Registrácia</button>
       </form>
 
       <form class="sign-in" action="#">
@@ -50,7 +61,7 @@
 
 <script>
   import $ from 'jquery'
-  import axios from "axios";
+  import axios from "axios"
 
   /* eslint-disable*/
   export default {
@@ -58,9 +69,20 @@
     data: () => {
       return {
         signUp: false,
+
         input: {
           email: "",
           password: ""
+        },
+
+        input2: {
+          FirstName: "",
+          LastName: "",
+          PhoneNumber: "",
+          Pin: "",
+          InsuranceCompany: "",
+          Password:"",
+          Email:""
         },
 
       }
@@ -69,20 +91,21 @@
     methods: {
       login() {
 
-        let self = this ;
+        let self = this;
 
-        var res = this.input.email.toLowerCase();
+        const res = this.input.email.toLowerCase();
 
-        var reqData = {
+        var reqData1 = {
           "username": res,
           "password": this.input.password,
           "grant_type": "password"
         };
 
-        axios({ method: "POST",
+        axios({
+          method: "POST",
           url: "https://eockovanie.somee.com/token",
-          data: $.param(reqData),
-          headers: { "content-type": "application/x-www-form-urlencoded" }
+          data: $.param(reqData1),
+          headers: {"content-type": "application/x-www-form-urlencoded"}
         }).then(function (response) {
           const token = response.data.access_token;
           if (token) {
@@ -90,7 +113,8 @@
           }
           /*sessionStorage.setItem("accessToken", token);*/
 
-          self.$router.push({path: '/overview'}).catch(() => {});
+          self.$router.push({path: '/overview'}).catch(() => {
+          });
 
         }).catch(function (error) {
 
@@ -98,15 +122,38 @@
         console.log(localStorage.accessToken);
       },
 
-      register(){
+      register() {
 
-// dorobit registraciu axios
+        var reqData2 = {
+          "Email": this.input2.Email,
+          "Password": this.input2.Password,
+          "ConfirmPassword": this.input2.Password,
+          "FirstName": this.input2.FirstName,
+          "LastName": this.input2.LastName,
+          "Pin": this.input2.Pin,
+          "PhoneNumber": this.input2.PhoneNumber,
+          "InsuranceCompany": this.input2.InsuranceCompany,
+          "Consent": true
+        };
+
+        let self = this;
+
+        axios({
+          method: "POST",
+          url: "https://eockovanie.somee.com/api/Account/Register",
+          data: $.param(reqData2),
+          headers: {"content-type": "application/x-www-form-urlencoded"}
+        }).then(function () {
+          alert("Vas ucet bol zaregistrovany, prihlaste sa!");
+          self.$router.push({path: '/'}).catch(() => {
+          }); console.log(data);
+
+        }).catch(function (error) {});
 
       }
 
-
-    }
-  }
+    } //methods end
+  } // all end
 </script>
 
 <style  scoped>
@@ -116,7 +163,7 @@
 .container {
   position: relative;
   width: 768px;
-  height: 480px;
+  height: 530px;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 15px 30px rgba(0, 0, 0, .2), 0 10px 10px rgba(0, 0, 0, .2);
@@ -215,7 +262,7 @@ form {
   flex-direction: column;
   padding: 90px 60px;
   width: calc(50% - 120px);
-  height: calc(100% - 180px);
+  height: calc(100% - 200px);
   text-align: center;
   background: linear-gradient(to bottom, #efefef, #ccc);
   transition: all 0.5s ease-in-out;

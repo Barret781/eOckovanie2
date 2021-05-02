@@ -11,7 +11,7 @@
             </router-link>
           <router-link to="/profile" active-class="active" tag="button" exact class="side-btn">
             <div class="link-container">
-              Profil
+              Editovanie profilu
             </div>
           </router-link>
             <router-link to="/messages" active-class="active" tag="button" exact class="side-btn">
@@ -19,11 +19,11 @@
                     Registrácia <br> na očkovanie
                 </div>
             </router-link>
-            <router-link to="/settings" active-class="active" tag="button" exact class="side-btn">
+           <!-- <router-link to="/settings" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                     Nastavenia
                 </div>
-            </router-link>
+            </router-link>-->
           <button id="btn-odhlasenie" v-on:click="logout"  >Odhlasenie</button>
         </div>
     </div>
@@ -47,6 +47,21 @@ export default {
 </script>
 
 <style scoped>
+
+button {
+  border-radius: 20px;
+  border: 1px solid #009345;
+  background-color: #009345;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 40px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.1s ease-in;
+}
+
 .title {
     font-size: 40px;
     margin-top: 20px;
