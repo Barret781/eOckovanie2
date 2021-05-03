@@ -10,7 +10,7 @@
 <script>
 
 import Sidebar from '../components/Sidebar'
-import router from "@/router";
+
 export default {
     name: 'home',
 

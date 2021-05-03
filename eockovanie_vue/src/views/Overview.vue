@@ -1,17 +1,21 @@
 <template>
 
     <div class="profile">
-      <div class="container">
-
+        <div class="container">
+          <UserList />
         </div>
-      </div>
+    </div>
 
 
 </template>
 
 <script>
+import UserList from "@/components/UserList";
     export default {
-        
+        name:"Overview",
+        components:{
+          UserList
+        }
     }
 </script>
 

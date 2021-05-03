@@ -22,7 +22,7 @@
 
 <script>
 import Dropdown from './Dropdown';
-
+/* eslint-disable*/
 export default {
   name: 'navbar',
   components: {

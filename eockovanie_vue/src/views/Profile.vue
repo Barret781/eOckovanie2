@@ -5,46 +5,44 @@
 
     <div class="avatar">
         <img src="@/assets/avatar.png"  width="250" height="250" class="center" alt="">
-      <p class="blocktext">Moj profil</p>
+      <p class="blocktext">Môj profil</p>
     </div>
 <div class="Two">
-  <div>
-      <form class="sign-up" action="#">
+  <form class="sign-up" action="#">
+
+ <h4 class="nadpis">Ste v editácii Vašho profilu</h4>
 
         <label>
           <input type="text" v-model="input.FirstName" placeholder="Meno" />
         </label>
-        <br>
+
         <label>
           <input type="text" v-model="input.LastName" placeholder="Priezvisko" />
         </label>
-        <br>
+
         <label>
           <input type="email" v-model="input.Email" placeholder="Email" />
         </label>
-        <br>
+
+
+
+
         <label>
           <input type="number" v-model="input.PhoneNumber" placeholder="Telefónne číslo" />
         </label>
-        </form>
-  </div>
-     <div>
-      <form class="sign-up" action="#">
-        <label>
-          <input type="password" v-model="input.Password" placeholder="Heslo" />
-        </label>
-        <br>
+
         <label>
           <input type="number" v-model="input.Pin" placeholder="Rodné číslo" />
         </label>
-        <br>
+
         <label>
           <input type="text" v-model="input.InsuranceCompany" placeholder="Poisťovňa" />
         </label>
         <br>
-        <button id="btn-edit" v-on:click="Edit()"  >Ulozenie</button>
-      </form>
-     </div>
+        <button id="btn-edit" type="button" v-on:click="Edit()"  >Uloziť editovanie profilu</button>
+
+
+  </form>
   </div>
 </div>
 
@@ -74,14 +72,13 @@ import axios from "axios"
       },
 
       methods: {
-        login() {
+        Edit() {
 
           let self = this;
+          const Token = localStorage.getItem("accessToken");
 
           var reqData1 = {
             "Email": this.input.Email,
-            "Password": this.input.Password,
-            "ConfirmPassword": this.input.Password,
             "FirstName": this.input.FirstName,
             "LastName": this.input.LastName,
             "Pin": this.input.Pin,
@@ -93,17 +90,48 @@ import axios from "axios"
             method: "POST",
             url: "https://eockovanie.somee.com/api/User/Update",
             data: $.param(reqData1),
-            headers: {"content-type": "application/x-www-form-urlencoded"}
+            headers: { "content-type": "application/x-www-form-urlencoded",
+              "authorization": "Bearer " + Token }
           }).then(function () {
             alert("Vas ucet bol upraveny!");
-            self.$router.push({path: '/overview'}).catch(() => {
+            self.$router.push({path: '/Profile'}).catch(() => {
             });
 
           }).catch(function (error) {
 
           });
 
+        },
+        getuser(){
+          const self = this
+          const Token = localStorage.getItem("accessToken");
+
+          axios({
+            method: "GET",
+            url: "https://eockovanie.somee.com/api/User",
+            headers: { "content-type": "application/x-www-form-urlencoded",
+              "authorization": "Bearer " + Token }
+          }).then(function (response) {
+            self.input.FirstName = response.data.FirstName
+            self.input.LastName = response.data.LastName
+            self.input.Pin = response.data.Pin
+            self.input.Password = response.data.Password
+            self.input.Email = response.data.Email
+            self.input.InsuranceCompany = response.data.InsuranceCompany
+            self.input.PhoneNumber = response.data.PhoneNumber
+          }).catch(function (error) {
+            console.log(error)
+          });
+
         }
+      },
+
+      mounted() {
+        const _self = this
+        $(document).ready (function () {
+          _self.getuser();
+        } )
+
       }
     }
 </script>
@@ -112,19 +140,21 @@ import axios from "axios"
 
 .profile {
     font-family: 'Roboto', sans-serif;
-    height: 100%;
-    width: 100%;
+    height: 85%;
+    width: 80%;
     font-size: 40px;
     color: rgb(167, 167, 167);
     font-weight: 600;
     display: flex;
     justify-items: center;
     align-content: center;
+    padding-left: 15%;
+  padding-top: 5%;
 }
 
 .container{
-  height: 92%;
-  width: 95%;
+  height: 85%;
+  width: 85%;
   margin: 50px;
   position: relative;
   border-radius: 10px;
@@ -147,13 +177,13 @@ P.blocktext {
   width: 4.5em;
   color: cornflowerblue;
   font-family: 'Roboto', sans-serif;
-
+  text-shadow: 0 10px 25px rgba(0, 0, 0, .2), 0 5px 5px rgba(0, 0, 0, .2);
 }
 
 button {
   border-radius: 20px;
-  border: 1px solid #009345;
-  background-color: #009345;
+  border: 1px solid rgba(0, 0, 0, .2);
+  background-color:#009345;
   color: #fff;
   font-size: 1rem;
   font-weight: bold;
@@ -162,6 +192,7 @@ button {
   text-transform: uppercase;
   cursor: pointer;
   transition: transform 0.1s ease-in;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, .2), 0 10px 10px rgba(0, 0, 0, .2);
 }
 button:active {
   transform: scale(0.9);
@@ -179,8 +210,8 @@ form {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 90px 60px;
-  width: calc(100% - 70px);
+  padding: 15px 20px;
+  width: calc(100% - 30px);
   height: calc(100% - 200px);
   text-align: center;
   transition: all 0.5s ease-in-out;
@@ -192,6 +223,7 @@ form input {
   padding: 8px 15px;
   margin: 6px 0;
   width: calc(100% - 30px);
+  font-size: 20px;
   border-radius: 15px;
   border-bottom: 1px solid #ddd;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, .4), 0 -1px 1px #fff, 0 1px 0 #fff;
@@ -208,4 +240,9 @@ form input:focus {
   justify-content: space-around;
 }
 
+.nadpis{
+  color: #222222;
+  font-size: 18px;
+  margin-top: -5px;
+}
 </style>

@@ -38,7 +38,7 @@
         <label>
           <input type="text" v-model="input2.InsuranceCompany" placeholder="Poisťovňa" />
         </label>
-        <button id="btn-registracia" v-on:click="register()" >Registrácia</button>
+        <button id="btn-registracia" type="button"  v-on:click="register()" >Registrácia</button>
       </form>
 
       <form class="sign-in" action="#">
@@ -51,7 +51,7 @@
           <input type="password" v-model="input.password" placeholder="Heslo" />
         </label>
         <a href="#">Zabudli ste heslo?</a>
-        <button id="btn-prihlasenie" v-on:click="login()" >Prihlásenie</button>
+        <button id="btn-prihlasenie" type="button" v-on:click="login()" >Prihlásenie</button>
       </form>
 
 
@@ -113,7 +113,7 @@
           }
           /*sessionStorage.setItem("accessToken", token);*/
 
-          self.$router.push({path: '/overview'}).catch(() => {
+          self.$router.push({path: '/Profile'}).catch(() => {
           });
 
         }).catch(function (error) {
@@ -144,7 +144,7 @@
           data: $.param(reqData2),
           headers: {"content-type": "application/x-www-form-urlencoded"}
         }).then(function () {
-          alert("Vas ucet bol zaregistrovany, prihlaste sa!");
+          alert("Váš účet bol zaregistrovaný, pozrite si email!");
           self.$router.push({path: '/'}).catch(() => {
           }); console.log(data);
 

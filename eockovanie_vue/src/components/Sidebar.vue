@@ -4,14 +4,14 @@
             eOčkovanie
         </div>
         <div class="menu-items">
-            <router-link to="/overview" active-class="active" tag="button" exact class="side-btn">
+           <!-- <router-link to="/overview" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                     Prehľad
                 </div>
-            </router-link>
+            </router-link>-->
           <router-link to="/profile" active-class="active" tag="button" exact class="side-btn">
             <div class="link-container">
-              Editovanie profilu
+              Profil
             </div>
           </router-link>
             <router-link to="/messages" active-class="active" tag="button" exact class="side-btn">
@@ -24,7 +24,7 @@
                     Nastavenia
                 </div>
             </router-link>-->
-          <button id="btn-odhlasenie" v-on:click="logout"  >Odhlasenie</button>
+          <button id="btn-odhlasenie" v-on:click="logout"  >Odhlásenie</button>
         </div>
     </div>
 </template>
