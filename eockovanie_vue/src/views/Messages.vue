@@ -8,15 +8,15 @@
             <div class="col">
 
               <label>
-                <input type="text" v-model="input.FirstName" placeholder="Meno" required />
+                <input type="text" v-model="input.FirstName" placeholder="Meno" required readonly/>
               </label>
 
               <label>
-                <input type="text" v-model="input.Pin" placeholder="Rodné číslo" required/>
+                <input type="text" v-model="input.Pin" placeholder="Rodné číslo" required readonly/>
               </label>
 
               <label>
-                <input type="email" v-model="input.Email" placeholder="Email" required/>
+                <input type="email" v-model="input.Email" placeholder="Email" required readonly/>
               </label>
 
               <select v-model="input.selectedInsuranceCompany">
@@ -31,7 +31,7 @@
             <div class="col">
 
               <label><span style="padding-left: 3px">
-                <input type="text" v-model="input.LastName" placeholder="Priezvisko" value="ee" required/></span>
+                <input type="text" v-model="input.LastName" placeholder="Priezvisko" value="ee" required readonly/></span>
               </label>
 
               <select v-model="input.selectedDoctor">
@@ -274,7 +274,7 @@ form input, select {
 
 select {
   width: calc(100% - 5px);
-  height: 38px;
+  height: 39px;
 }
 
 .time {

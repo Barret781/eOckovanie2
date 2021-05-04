@@ -13,30 +13,30 @@
  <h4 class="nadpis">Ste v editácii Vašho profilu</h4>
 
         <label>
-          <input type="text" v-model="input.FirstName" placeholder="Meno" />
+          <input type="text" v-model="input.FirstName" placeholder="Meno" required/>
         </label>
 
         <label>
-          <input type="text" v-model="input.LastName" placeholder="Priezvisko" />
+          <input type="text" v-model="input.LastName" placeholder="Priezvisko" required/>
         </label>
 
         <label>
-          <input type="email" v-model="input.Email" placeholder="Email" />
+          <input type="email" v-model="input.Email" placeholder="Email" required/>
         </label>
 
 
 
 
         <label>
-          <input type="number" v-model="input.PhoneNumber" placeholder="Telefónne číslo" />
+          <input type="number" v-model="input.PhoneNumber" placeholder="Telefónne číslo" required/>
         </label>
 
         <label>
-          <input type="number" v-model="input.Pin" placeholder="Rodné číslo" />
+          <input type="number" v-model="input.Pin" placeholder="Rodné číslo" required/>
         </label>
 
         <label>
-          <input type="text" v-model="input.InsuranceCompany" placeholder="Poisťovňa" />
+          <input type="text" v-model="input.InsuranceCompany" placeholder="Poisťovňa" required/>
         </label>
         <br>
         <button id="btn-edit" type="button" v-on:click="Edit()"  >Uloziť editovanie profilu</button>
@@ -140,7 +140,7 @@ import axios from "axios"
 
 .profile {
     font-family: 'Roboto', sans-serif;
-    height: 85%;
+    height: 90%;
     width: 80%;
     font-size: 40px;
     color: rgb(167, 167, 167);
@@ -149,7 +149,7 @@ import axios from "axios"
     justify-items: center;
     align-content: center;
     padding-left: 15%;
-  padding-top: 5%;
+    padding-top: 5%;
 }
 
 .container{
@@ -205,14 +205,13 @@ button.invert {
   border-color: #fff;
 }
 form {
-  /*position: absolute;*/
   top: 0;
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 15px 20px;
   width: calc(100% - 30px);
-  height: calc(100% - 200px);
+  height: calc(100% - 20px);
   text-align: center;
   transition: all 0.5s ease-in-out;
 }
@@ -223,7 +222,8 @@ form input {
   padding: 8px 15px;
   margin: 6px 0;
   width: calc(100% - 30px);
-  font-size: 20px;
+  height: calc(100% - 10px);
+  font-size: 18px;
   border-radius: 15px;
   border-bottom: 1px solid #ddd;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, .4), 0 -1px 1px #fff, 0 1px 0 #fff;
